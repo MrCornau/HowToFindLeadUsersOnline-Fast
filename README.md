@@ -1,6 +1,6 @@
 # How to Find Lead Users Online (Fast)
 
-![alt text](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Headerimage.jpg?raw=true)
+![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Headerimage.jpg?raw=true)
 
 Masterthesis @HfG Gmuend. Read more about our Thesis [here](https://afurthersourceforinnovation.digital).
 
@@ -98,7 +98,7 @@ Use the words which have been collected in the Workshop to create patterns _(Wor
    ├─ 03_CameraDomain.model #Pretrained model, based on the camera domain
 ```
 
-0. Demo
+0. Demo _01_Word2VecDemonstration.py_
 
 ```
 from gensim.models import Word2Vec
@@ -113,7 +113,7 @@ model.wv.similar_by_word('spot', topn=10)
 
 ```
 
-1. Prepare Data
+1. Prepare Data _02_Word2Vec.py_
 
 ```
 
@@ -130,56 +130,7 @@ content = removed.content.apply(gensim.utils.simple_preprocess)
 
 ```
 
-2. Training der Daten
-
-```
-model = gensim.models.Word2Vec(
-    window = 10, # Anzahl der Wörter, die jeweils in den Zusammenhang gesetzt werden.
-    min_count = 2, # Mindest Anzahl an Wörter pro Satz
-    workers= 6 # Wie viele Kerne des Rechners können gleichzeitig für das Training verwendet werden
-)
-
-model.build_vocab(content, progress_per=1000)
-
-model.train(content, total_examples=model.corpus_count, epochs=model.epochs) # Training des Models
-
-
-```
-
-## 1. Word 2 Vec
-
-Create a Word 2 Vec Model to find word embeddings in your data corpus. Therefore we used Gensim.
-
-```
-import gensim
-import pandas as pd
-from gensim.test.utils import datapath
-from gensim.models.word2vec import Text8Corpus
-from gensim.models.phrases import Phrases, Phraser
-
-df = pd.read_csv('YourFile.csv')
-
-```
-
-At First we prepared our data
-
-```
-import gensim
-import pandas as pd
-
-df = pd.read_csv('Path-to-your-data.csv')
-
-
-removed = df.dropna(subset=['content'])  # remove all Rows whitout content
-# Preprocessing of the data for Word2Vec training. All words are split into tokens and set in lowercase.
-content = removed.content.apply(gensim.utils.simple_preprocess)
-
-# This results in the following structure. A list is generated from each record. Each word is stored separately as a token. Also the punctuation and unnecessary words like 'a' were removed.
-#['my', 'germination', 'process', 'is', 'so', 'far', 'so', 'good', 'next', 'step', 'is', 'to', 'transplant', 'into', 'soil']
-
-```
-
-Following we set up the gensim modle
+2. Following we set up the gensim modle _02_Word2Vec.py_
 
 ```
 model = gensim.models.Word2Vec(
@@ -190,26 +141,30 @@ model = gensim.models.Word2Vec(
 model.build_vocab(content, progress_per=1000)
 ```
 
-Train the Model
+3. Train the Model _02_Word2Vec.py_
 
 ```
 model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
 ```
 
-Save the model for later use
+4. Save the model for later use _02_Word2Vec.py_
 
 ```
 model.save(
     'DomainName.csv')
 ```
 
-Use the Model to find similar words in your context
+5. Use the Model to find similar words in your context _02_Word2Vec.py_
 
 ```
 model.wv.most_similar('diy')
 ```
 
 # 4. Analyzing the Corpus
+
+For finding patterns as 'I have created' we recommend using a rule-based approach. When analyzing the corpus it is recommended, to save as many features as possible, to create further data analysis tasks. Most important is that you preserve the date, to check the occurrences of a topic over time. For topic extraction, f.e. in trend/market forums, you can use rather a word list or use a semantic search. This involves searching for trend-describing terms within the forums of the market. The same applies in reverse in forums from the trend. In overlapping forums, search for both types of keywords in a row.
+
+![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Patterns.jpg?raw=true)
 
 # 5. Manual Analysis
 
