@@ -8,11 +8,11 @@ The Digital Lead User Analysis is a method to find future customer needs. By ana
 
 In our master thesis, we have taken the approach of [Eric von Hippel and Sandro Kaulartz](https://evhippel.files.wordpress.com/2019/01/ai-method-for-discovering-need-solution-pairs-2019.pdf) and put it into an economic context with the help of methods from strategic design.
 
-In this repository it is described how to repeat our technological process, and apply the Lead User Method to specific domain.
+In this repository, it is described how to repeat our technological process, and apply the Lead User Method to a specific domain.
 On our [website](https://afurthersourceforinnovation.digital), the necessary steps before and after are described.
 
 1. [Setup](#1-setup)
-2. [Generation of the Data Corpus](#2-generation-of-the-data-corpus)
+2. [Creation of the Data Corpus](#2-creation-of-the-data-corpus)
 3. [Defining Patterns and Words](#3-defining-patterns-and-words)
 4. [Analyzing the Corpus](#4-analyzing-the-corpus)
 5. [Manual Analysis](##5-manual-analysis)
@@ -24,14 +24,14 @@ On our [website](https://afurthersourceforinnovation.digital), the necessary ste
 @First set up the environment and install all necessary requirements. It is recommended to use Python 3.9 or above.
 Steps down below can be skipped if you are using Jupiter Notebook, Kaggle, or Google Colab.
 
-#### 1. Clone the Repository
+#### 1. Clone the repository
 
 ```
   git clone https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast.git LeadUserAnalysisInMyDomain
   cd LeadUserAnalysisInMyDomain
 ```
 
-#### 2. Initialize a Virtual Environment
+#### 2. Initialize a virtual environment
 
 ```
 pip install virtualenv
@@ -45,33 +45,33 @@ source venv/bin/activate
 pip3 install . -r requirements.txt
 ```
 
-#### 4. Install a Spacy NLP Modell
+<!-- #### 4. Install a Spacy NLP Modell
 
 Depending on which system you are working - Windows/[Linux,Mac] - CPU/GPU - you have to change the Spacy Model you are working with.
 You seperately have to download the spacy English model. We used the en_core_web_md modell. Get more Information [here](https://spacy.io/usage).
 
 ```
 python3 -m spacy download en_core_web_md modell
-```
+``` -->
 
-# 2. Generation of the Data Corpus
+# 2. Creation of the Data Corpus
 
-We used date from different forum like reddit, github, devpost, twitter to collect subject specific data.
+We used data from different forums like Reddit, GitHub, Devpost, Twitter to collect subject-specific data.
 To use the prepared Matchers you should use the following format for your data.
 
 <table><tbody><tr><th>Origin</th><th>Suborigin</th><th>Autor</th><th>Link</th><th>Content</th><th>Date</th><th>Medialink</th><th>Score</th></tr><tr><td>Reddit</td><td>r/photography</td><td>MrCornau</td><td>https://</td><td>User generated content goes here</td><td> Timestamp</td><td>https://</td><td>Score/Likes/etc.</td></tr></tbody></table>
 
-### Scraping Data:
+### Scraping data:
 
 Collect data from the forums which have been defined in the workshop _(Worksheet 8)_. From previous experiences, data from the last two years is enough. Older posts are not relevant for future innovation topics. Use the prepared scraping options as described in the prepared Github Repository.
 
-#### 1. Check if you can find an already written scraper in the following links
+#### 1. Check if you can find an already written scraper under the following links
 
 - https://github.com/LameLemon/scrapers
 
 We for example used the [PSRAW](https://github.com/markekraus/PSRAW) to get comments from Reddit.
 
-#### 2. Use librarys like Beatiful Soup
+#### 2. Use libraries like Beatiful Soup
 
 In our case the open source Python library Beautifulsoup was used to scrape a forum. This can be used to retrieve and search the HTML code of a given link. You then look for specific features of individual comments. For example, a unique CSS class or an ID with which comments can be identified.
 
@@ -86,13 +86,13 @@ We provided some examples to understand the basic concept of beautiful soup.
    ├─ 03_CrawlComments.py #scrape comments into an csv file (Pagination includet)
 ```
 
-#### 3. Use Webservices like ParseHub
+#### 3. Use web services like ParseHub
 
-Furthermore, you can use providers like [Parshub](https://www.parsehub.com/) to get comments more easily. They offer a user-friendly interface to filter HTML code similar to the Beautiful Soup Library. In contrast, however, this approach is not unlimited free of charge.
+In addition, you can use providers such as [Parshub] (https://www.parsehub.com/) to get comments more easily. They provide a user-friendly interface for filtering HTML code similar to the Beautiful Soup Library. In contrast, however, this approach is not free indefinitely.
 
-# 3. Defining Patterns and Words
+# 3. Definition of patterns and words
 
-Use the words which have been collected in the Workshop to create patterns _(Worksheet 3 & 8)_. If the field is new and the jargon of the field could not be evaluated by experts, we recommend using a Word2Vec Model to find word embeddings in your data corpus. Thus, further words can be found within a subject area, but also deonyms. For example, the deonym Tempo (handkerchiefs) could be uncovered by such a model. While analysing gardening forums, we came across the deonym Toro, which is used for lawn mowers.
+Use the words collected in the workshop to create patterns _(Worksheets 3 & 8)_. If the subject area is new and the jargon of the subject area could not be evaluated by experts, we recommend using a Word2Vec model to find word embeddings in your data corpus. This way, more words can be found within a subject area, as well as deonyms. For example, the deonym tempo (handkerchiefs) could be uncovered by such a model. While analyzing gardening forums, we came across the deonym toro, which is used for lawn mower.
 
 ```
    Word2VecExamples/
@@ -116,7 +116,7 @@ model.wv.similar_by_word('spot', topn=10)
 
 ```
 
-#### 1. Prepare Data | <sub><sup>_02_Word2Vec.py_</sup></sub>
+#### 1. Prepare data | <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 
@@ -133,7 +133,7 @@ content = removed.content.apply(gensim.utils.simple_preprocess)
 
 ```
 
-#### 2. Following we set up the gensim modle | <sub><sup>_02_Word2Vec.py_</sup></sub>
+#### 2. Following set up the gensim modle | <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 model = gensim.models.Word2Vec(
@@ -144,7 +144,7 @@ model = gensim.models.Word2Vec(
 model.build_vocab(content, progress_per=1000)
 ```
 
-#### 3. Train the Model _02_Word2Vec.py_
+#### 3. Train the model _02_Word2Vec.py_
 
 ```
 model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
@@ -157,13 +157,13 @@ model.save(
     'DomainName.csv')
 ```
 
-#### 5. Use the Model to find similar words in your context | <sub><sup>_02_Word2Vec.py_ </sup></sub>
+#### 5. Use the model to find similar words in your context | <sub><sup>_02_Word2Vec.py_ </sup></sub>
 
 ```
 model.wv.most_similar('diy')
 ```
 
-# 4. Analyzing the Corpus
+# 4. Analysis of the corpus
 
 ```
    MatcherExamples/
@@ -173,13 +173,13 @@ model.wv.most_similar('diy')
    ├─ matcherFunctions.py #Helperfunctions
 ```
 
-For finding patterns as 'I have created' we recommend using a rule-based approach. When analyzing the corpus it is recommended, to save as many features as possible, to create further data analysis tasks. Most important is that you preserve the date, to check the occurrences of a topic over time. For topic extraction, f.e. in trend/market forums, you can use rather a word list or use a semantic search. This involves searching for trend-describing terms within the forums of the market. The same applies in reverse in forums from the trend. In overlapping forums, search for both types of keywords in a row.
+For finding patterns like "I created" we recommend using a rule-based approach. When analyzing the corpus, it is recommended to save as many features as possible to create further data analysis tasks. Most importantly, keep the date to check the occurrence of a topic over time. For topic extraction, for example in trending/market forums, you can rather use a word list or use semantic search. This involves searching for trend-describing terms in market forums. The same applies vice versa in forums from the trend. In overlapping forums, search for both types of keywords in a row. [DoubleMatcher](####double-matcher)
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Patterns.jpg?raw=true)
 
 #### 1. InventionMatcher | <sub><sup>01_FindPatterns.py</sup></sub>
 
-The Innovations Matcher searches for sentences in which a user reports that she has created something or wants to create something. For this purpose, we used verbs that were defined based on our analysis of a DIY forum. Also operators were used in the rules, which lead to the fact that a word may not occur once or several times. Thus, different building blocks of sentences could be marked as optional. Thus sentences like 'I have created' were discovered as well as 'I will create or I have created'.
+The Innovations Matcher searches for sentences in which a user reports that they have created something or want to create something. To do this, we used verbs that were defined based on our analysis of a home improvement forum. Also, operators were used in the rules that result in a word not being allowed to occur once or more than once. This allowed various sentence components to be marked as optional. Thus, sentences such as "I have created" were detected as well as "I will create or I have created."
 
 ```
 InventionMatcher = Matcher(nlp.vocab)
@@ -200,7 +200,7 @@ InventionMatcher.add("InventionMatcher", [InnovationPattern])
 
 #### 2. Sent Start Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
 
-During the manual analysis of the DIY forum, it was noticed that many users do not necessarily use a personal pronoun to report an invention in the first person. Often this is also used silently. For example: Created a Web-App. For this we used a matcher (Fig.15), which specifically looks for one of our innovation verbs at the beginning of a sentence. ("IS_SENT_START": True)
+Manual analysis of the DIY forum revealed that many users do not necessarily use a personal pronoun to report an invention in the first person. Often this is used implicitly. For example: Created a web app. For this, we used a matcher that specifically looks for one of our innovation verbs at the beginning of a sentence. ("IS_SENT_START": True)
 
 ```
 SentStartMatcher = Matcher(nlp.vocab)
@@ -215,7 +215,7 @@ SentStartMatcher.add("SentStartMatcher", [SentStartPattern])
 
 #### 3. NounMatcher | <sub><sup>01\*FindPatterns.py</sup></sub>
 
-Another pattern of describing one's own inventions was found to be the use of certain nouns in combination with a pronoun. For example, \*'my creation’\_.
+Another pattern for describing one's inventions was the use of certain nouns in combination with a pronoun. For example: \*'my invention'\_.
 
 ```
 NounMatcher = Matcher(nlp.vocab)
@@ -230,7 +230,7 @@ NounMatcher.add("NounMatcher", [NounPattern])
 
 #### 4. Subject Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
 
-The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, drawn on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list the phrase matcher from SpaCy was used. Here we did also experiments with Zero Shot Learning and Semantic search which you can find [here](#7-experimental-approaches)
+The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, taken on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list, the Phrase Matcher from SpaCy was used. Here we also performed experiments with Zero Shot Learning and Semantic Search, which can be found [here](#7-experimental-approaches).
 
 ```
 SubjectMatcher = PhraseMatcher(nlp.vocab, attr='LOWER')
@@ -243,10 +243,10 @@ SubjectMatcher.add('SubjectPattern', SubjectPattern)
 
 #### 5. Analyse your Corpus | <sub><sup>01_FindPatterns.py</sup></sub>
 
-Based on the respective matchers, the comments were then analyzed. In case a comment matches a matcher, an object is returned which returns the sentence and the recognized pattern. If there is no match, False is returned.
-Iterate over the rows of your corpus and use the Single or Double Matcher
+Based on the respective matchers, the comments were then analyzed. If a comment matches a matcher, an object is returned containing the sentence and the recognized pattern. If there is no match, False is returned.
+Iterate over the rows of your corpus and use the Single or Double Matcher.
 
-Single Matcher
+#### Single Matcher
 
 ```
 #Positive Result
@@ -257,7 +257,7 @@ SingleMatcher(InnovationMatcher,“I created a WebApp“)
 SingleMatcher(InnovationMatcher,“I really don’t like my camera“) #returns {„detected“: False}
 ```
 
-Double Matcher
+#### Double Matcher
 
 ```
 #Positive Result
@@ -273,7 +273,7 @@ SingleMatcher(InnovationMatcher,“I really dont like my camera“) #Returns {�
 
 #### 6. Increase speed | <sub><sup>02_PrepareDoc.py </sup></sub>
 
-We found out that tokenizing every sentence of our corpus needed the most time. To get the corpus analysed faster, you can prepare the doc object used by the Matchers. Thereby you analyse the doc object and store it as bytes. By this we could improve the time that was needed to analyse our corpus significantly
+We have found that tokenizing each sentence of our corpus takes the most time. To analyze the corpus faster, you can prepare the doc object used by the matchers. In this process, you analyze the doc object and store it as bytes. In this way, we were able to significantly reduce the time needed to analyze our corpus.
 
 ```
 import pandas as pd
@@ -297,8 +297,9 @@ df['doc'] = df['content'].apply(docObj)
 df.to_csv('CorpusWithDoc.csv')
 ```
 
-Matcher
-Just change the FunctionNames in your file, to make use of the Matchers, that already uses the pre analysed doc file
+#### Matcher
+
+Just change the functions names in your file to use the matchers that already use the pre-analyzed doc file.
 
 ```
 SingleMatcherWithDoc(InnovationMatcher,doc,“I created a WebApp“)
@@ -307,7 +308,7 @@ DoubleMatcherWithDoc(SubjectMatcher, InnovationMatcher,doc,“I have created a n
 
 #### 7. Prepare for Display (Old Prototype) | <sub><sup>03_PrepareforDisplay.py</sup></sub>
 
-In ould prototype we splittet the data corpus by year, suborigin and found pattern. Thereby we could skip bad lists. The curret Tool for amanual analysis is currently under construction, why we explain here how to use the old one.
+In our prototype, we split the data corpus by year, origin, and pattern found. This allowed us to omit some bad lists. The current tool for manual analysis is currently under construction, so we explain how to use the old tool here.
 
 ```
 Folder/
@@ -318,10 +319,10 @@ Folder/
 │  ├─ ...
 ```
 
-# 5. Manual Analysis
+# 5. Manual analysis
 
-For the manual selection of filtered posts, a web tool was developed which allows the analyzed comments to be imported .Posts from lead users can be found quickly by highlighting the key phrase.
-In our testing Phase we used the prototype which we also provide in this repository. Aftwerwards we started to develope a new prototype for more easy scanning and reading. It will be updatet here when it is finished. Till then you should use the old (ugly) prototype.
+For manual selection of filtered posts, we developed a web tool that allows importing the analyzed comments and quickly finding posts from lead users by highlighting the keyword.
+In our testing phase, we used the prototype that we also provide in this repository. After that, we started developing a new prototype to make scanning and reading easier. It will be updated here as soon as it is ready. Until then, you should use the old (ugly) prototype.
 
 #### 1. Old version
 
@@ -334,14 +335,14 @@ cd WebApp
 npm i
 ```
 
-Install the Json Server globaly, to store selected comments
+Install Json-Server globaly, to store selected comments in an local Json-File
 
 ```
 npm install -g json-server
 ```
 
-Place your analysed files in the json folder of the WebApp.
-Folders are automatically displayed as tabs.
+Place your analyzed files in the json folder of the WebApp.
+The folders are automatically displayed as tabs.
 
 ```
 Webapp/
@@ -361,15 +362,15 @@ Start the development server
 npm run dev
 ```
 
-2. New Webapp, with more features and ab better User Experience - coming soon!
+2. New webapp, with more features and better usability - coming soon!
 
 ![WebApp-New](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/FinalWebapp.jpg?raw=true)
 
 # 6. Integration Into Figma
 
-We provide a Figma Plugin, to easilie move from the Webapp into a tool where workshops can be hosted.
+We provide a Figma plugin to convert the webapp into a tool where workshops can be hosted.
 
-#### 1. Setup Figma Plugin (Currently in Developemt Mode)
+#### 1. Set up Figma plugin (currently in development mode)
 
 ```
 FigmaPlugin/
@@ -377,14 +378,14 @@ FigmaPlugin/
 ├─ ...
 ```
 
-Import the Plugin via the manifest.json file.
+Import the plugin via the manifest.json file.
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginImport.gif?raw=true)
 
 #### 2. Download the selected comments
 
-Use the download button in the Webapp to download your selected comments. Import them into figma via the provided Figma Plugin.
-From now on you can follow the process which is explained on our [Website](https://afurthersourceforinnovation.digital).
+Use the download button in the webapp to download your selected comments. Import them into figma using the Figma plugin provided.
+From now on, you can follow the process explained on our [website](https://afurthersourceforinnovation.digital).
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
@@ -392,9 +393,9 @@ From now on you can follow the process which is explained on our [Website](https
 
 1. Zero-Shot-Learning
 
-Zero shot learning, in a machine learning context, describes a model that is trained to fit a particular context without ever having seen an example. To test this type of model, you can use the open source library Transformers, which provides easy access to zero shot learning models. Here is an great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) which explains the approach.
+Zero Shot Learning, in the context of machine learning, describes a model that is trained for a specific context without ever seeing an example. To test this type of model, you can use the open-source Transformers library, which provides easy access to zero-shot learning models. Here's a great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) that explains the approach.
 
-First, we tested how well the model can recognize a topic. Based on the word "gardening" alone, this model classified the sentence: "I created a new tractor for my lawn" with a probability of 98% as belonging to this topic. This type of model could be used, for example, to replace the Subject Matcher or to improve it.
+First, we tested how well the model could recognize a topic. Using the word "gardening" alone, this model classified the sentence, "I bought a new tractor for my lawn" as belonging to that topic with a probability of 98%. This type of model could replace or improve the Subject Matcher, for example.
 
 ```
 sequence = "I created a new tractor for my lawn."
@@ -414,7 +415,7 @@ classifier(sequence, candidates_tags)
 # 'sequence': 'I was eating bananas.'}
 ```
 
-Similar experiments were carried out with the recognition of innovative posts. Here, however, it quickly became apparent that the zero-shot classifier solves the task worse than the matcher we created. However, with professional training, we could imagine that this type of matcher could provide easier access to the method in the future. However, there will also be the problem that it will be difficult to distinguish between lead user innovations and things that users have built themselves. To the status quo, we still see the human component as essential here.
+Similar experiments were conducted with the recognition of innovative contributions. Here, however, it quickly became apparent that the zero-shot classifier solves the task worse than the matcher we developed. However, we could imagine that this type of matcher, with professional training, could provide easier access to the method in the future. However, there will also be the problem that it will be difficult to distinguish between lead user innovations and things that users have built themselves. For the status quo, we still see the human component as essential here.
 
 ```
 sequence = “I developed a film.”
@@ -435,7 +436,6 @@ classifier(sequence, candidates_tags)
 ```
 
 2. Semantic Search
-
-With the help of a semantic search, another attempt was made to filter the data corpus (find documents that fit together thematically). Here, the approach was based on an article by [Rajput (2020)](https://www.kaggle.com/ajitrajput/semantic-search-engine-using-nlp). First, a Tf-IDF (Term frequency-Inverse Document Frequency) model was created using the corpus. The model prioritizes the words from each document or comment that are most relevant to the context. Using a Latent Semantic Indexing (LSI) model, semantic principal components of the individual documents are then analyzed to find semantically related groups. For example, the term car belongs to a semantic concept that also includes words such as driving, traffic jam, tires, etc. This analysis uses factors such as the combinatorics of words used and is thus very similar to the Word2Vec model. Through this model, thematic similar documents can then be found without necessarily using the same word. In contrast to a rule-based approach, this can save a lot of time, since topic-specific words do not have to be collected. In our experiments, we were able to filter the corpus thematically. This can be especially useful when searching developer forums such as GitHub or trending forums. However, the attempt to search for posts in which lead users report on their innovations did not work as well as we had hoped. Here, the results of the rule-based approach were better.
+   With the help of a semantic search, another attempt was made to filter the data corpus (to find thematically related documents). The approach was based on an article by [Rajput (2020)](https://www.kaggle.com/ajitrajput/semantic-search-engine-using-nlp). First, a Tf-IDF (Term frequency-Inverse Document Frequency) model was built using the corpus. The model prioritizes the words from each document or comment that are most relevant to the context. A Latent Semantic Indexing (LSI) model is then used to analyze the semantic principal components of each document to find semantically related groups. For example, the term car belongs to a semantic concept that also includes words such as driving, traffic jam, tires, etc. This analysis uses factors such as the combinatorics of the words used and is thus very similar to the Word2Vec model. This model can be used to find thematically similar documents without necessarily using the same word. In contrast to a rule-based approach, this can save a lot of time since topic-specific words do not need to be collected. In our experiments, it was possible to filter the corpus thematically. This can be particularly useful when searching developer forums such as GitHub or trending forums. However, trying to search for posts where leading users talk about their innovations did not work as well as we had hoped. Here, the results of the rule-based approach were better.
 
 Semantic search offers great potential for future work, especially since it is possible to search for topics in a corpus even without labeled data.
