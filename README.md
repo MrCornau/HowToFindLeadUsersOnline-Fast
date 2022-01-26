@@ -55,6 +55,8 @@ You seperately have to download the spacy English model. We used the en_core_web
 python3 -m spacy download en_core_web_md modell
 ``` -->
 
+<br/><br/>
+
 # 2. Creation of the Data Corpus
 
 We used data from different forums like Reddit, GitHub, Devpost, Twitter to collect subject-specific data.
@@ -90,6 +92,8 @@ We provided some examples to understand the basic concept of beautiful soup.
 #### 3. Use web services like ParseHub
 
 In addition, you can use providers such as [Parshub] (https://www.parsehub.com/) to get comments more easily. They provide a user-friendly interface for filtering HTML code similar to the Beautiful Soup Library. In contrast, however, this approach is not free indefinitely.
+
+<br/><br/>
 
 # 3. Definition of patterns and words
 
@@ -163,6 +167,8 @@ model.save(
 ```
 model.wv.most_similar('diy')
 ```
+
+<br/><br/>
 
 # 4. Analysis of the corpus
 
@@ -320,6 +326,8 @@ Folder/
 │  ├─ ...
 ```
 
+<br/><br/>
+
 # 5. Manual analysis
 
 For manual selection of filtered posts, we developed a web tool that allows importing the analyzed comments and quickly finding posts from lead users by highlighting the keyword.
@@ -367,6 +375,8 @@ npm run dev
 
 ![WebApp-New](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/FinalWebapp.jpg?raw=true)
 
+<br/><br/>
+
 # 6. Integration Into Figma
 
 We provide a Figma plugin to convert the webapp into a tool where workshops can be hosted.
@@ -393,7 +403,8 @@ From now on, you can follow the process explained on our [website](https://afurt
 
 If you want to have also Images in your App, request an demo access. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
 https://cors-anywhere.herokuapp.com/corsdemo
-\
+
+<br/><br/>
 
 # 7. Experimental Approaches
 
