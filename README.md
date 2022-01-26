@@ -391,10 +391,12 @@ From now on, you can follow the process explained on our [website](https://afurt
 
 If you want to have also Images in your App, request an demo access. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
 https://cors-anywhere.herokuapp.com/corsdemo
+\
+\
 
 # 7. Experimental Approaches
 
-1. Zero-Shot-Learning
+#### 1. Zero-Shot-Learning
 
 Zero Shot Learning, in the context of machine learning, describes a model that is trained for a specific context without ever seeing an example. To test this type of model, you can use the open-source Transformers library, which provides easy access to zero-shot learning models. Here's a great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) that explains the approach.
 
@@ -438,7 +440,8 @@ classifier(sequence, candidates_tags)
 # ‘sequence’: ‘I created a Web-App.’}
 ```
 
-2. Semantic Search
-   With the help of a semantic search, another attempt was made to filter the data corpus (to find thematically related documents). The approach was based on an article by [Rajput (2020)](https://www.kaggle.com/ajitrajput/semantic-search-engine-using-nlp). First, a Tf-IDF (Term frequency-Inverse Document Frequency) model was built using the corpus. The model prioritizes the words from each document or comment that are most relevant to the context. A Latent Semantic Indexing (LSI) model is then used to analyze the semantic principal components of each document to find semantically related groups. For example, the term car belongs to a semantic concept that also includes words such as driving, traffic jam, tires, etc. This analysis uses factors such as the combinatorics of the words used and is thus very similar to the Word2Vec model. This model can be used to find thematically similar documents without necessarily using the same word. In contrast to a rule-based approach, this can save a lot of time since topic-specific words do not need to be collected. In our experiments, it was possible to filter the corpus thematically. This can be particularly useful when searching developer forums such as GitHub or trending forums. However, trying to search for posts where leading users talk about their innovations did not work as well as we had hoped. Here, the results of the rule-based approach were better.
+#### 2. Semantic Search
+
+With the help of a semantic search, another attempt was made to filter the data corpus (to find thematically related documents). The approach was based on an article by [Rajput (2020)](https://www.kaggle.com/ajitrajput/semantic-search-engine-using-nlp). First, a Tf-IDF (Term frequency-Inverse Document Frequency) model was built using the corpus. The model prioritizes the words from each document or comment that are most relevant to the context. A Latent Semantic Indexing (LSI) model is then used to analyze the semantic principal components of each document to find semantically related groups. For example, the term car belongs to a semantic concept that also includes words such as driving, traffic jam, tires, etc. This analysis uses factors such as the combinatorics of the words used and is thus very similar to the Word2Vec model. This model can be used to find thematically similar documents without necessarily using the same word. In contrast to a rule-based approach, this can save a lot of time since topic-specific words do not need to be collected. In our experiments, it was possible to filter the corpus thematically. This can be particularly useful when searching developer forums such as GitHub or trending forums. However, trying to search for posts where leading users talk about their innovations did not work as well as we had hoped. Here, the results of the rule-based approach were better.
 
 Semantic search offers great potential for future work, especially since it is possible to search for topics in a corpus even without labeled data.
