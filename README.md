@@ -367,6 +367,24 @@ npm run dev
 
 # 6. Integration Into Figma
 
+We provide a Figma Plugin, to easilie move from the Webapp into a tool where workshops can be hosted.
+
+#### 1. Setup Figma Plugin (Currently in Developemt Mode)
+
+```
+FigmaPlugin/
+├─ manifest.json
+├─ ...
+```
+
+Import the Plugin via the manifest.json file.
+
+![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/ImportPlugin.gif?raw=true)
+
+#### 2. Download the selected comments
+
+Use the download button to download your selected comments.
+
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
 # 7. Experimental Approaches

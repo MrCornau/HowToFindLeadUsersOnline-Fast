@@ -1,0 +1,12 @@
+{
+  "name": "Lead Finder",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma", "figjam"],
+  "id": "1068205526557911329",
+  "relaunchButtons": [
+    { "command": "edit", "name": "Edit shape" },
+    { "command": "open", "name": "Open Shaper", "multipleSelection": true }
+  ]
+}
