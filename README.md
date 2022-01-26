@@ -157,7 +157,7 @@ model.save(
     'DomainName.csv')
 ```
 
-#### 5. Use the Model to find similar words in your context _02_Word2Vec.py_
+#### 5. Use the Model to find similar words in your context | <sub><sup>_02_Word2Vec.py_ </sup></sub>
 
 ```
 model.wv.most_similar('diy')
@@ -320,6 +320,24 @@ Folder/
 
 # 5. Manual Analysis
 
+For the manual selection of filtered posts, a web tool was developed which allows the analyzed comments to be imported .Posts from lead users can be found quickly by highlighting the key phrase.
+In our testing Phase we used the prototype which we also provide in this repository. Aftwerwards we started to develope a new prototype for more easy scanning and reading. It will be updatet here when it is finished. Till then you should use the old (ugly) prototype.
+
+#### 1. Old version
+
+![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/WebApp-Old.jpg?raw=true)
+
+Install all dependencies
+
+```
+cd WebApp
+npm i
+```
+
+Install the Json Server globaly, to store selected comments
+
 # 6. Integration Into Figma
+
+![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Plugin_Webapp.m4v?raw=true)
 
 # 7. Experimental Approaches
