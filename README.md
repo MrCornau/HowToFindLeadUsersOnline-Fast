@@ -391,7 +391,8 @@ From now on you can follow the process which is explained on our [Website](https
 # 7. Experimental Approaches
 
 1. Zero-Shot-Learning
-   Zero shot learning, in a machine learning context, describes a model that is trained to fit a particular context without ever having seen an example. To test this type of model, you can use the open source library Transformers, which provides easy access to zero shot learning models. Here is an great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) which explains the approach.
+
+Zero shot learning, in a machine learning context, describes a model that is trained to fit a particular context without ever having seen an example. To test this type of model, you can use the open source library Transformers, which provides easy access to zero shot learning models. Here is an great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) which explains the approach.
 
 First, we tested how well the model can recognize a topic. Based on the word "gardening" alone, this model classified the sentence: "I created a new tractor for my lawn" with a probability of 98% as belonging to this topic. This type of model could be used, for example, to replace the Subject Matcher or to improve it.
 
