@@ -338,6 +338,6 @@ Install the Json Server globaly, to store selected comments
 
 # 6. Integration Into Figma
 
-![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Plugin_Webapp.m4v?raw=true)
+![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Plugin.gif?raw=true)
 
 # 7. Experimental Approaches
