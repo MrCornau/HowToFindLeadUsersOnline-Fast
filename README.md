@@ -389,6 +389,9 @@ From now on, you can follow the process explained on our [website](https://afurt
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
+If you want to have also Images in your App, request an demo access. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
+https://cors-anywhere.herokuapp.com/corsdemo
+
 # 7. Experimental Approaches
 
 1. Zero-Shot-Learning
