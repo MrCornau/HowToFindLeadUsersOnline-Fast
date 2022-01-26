@@ -18,6 +18,7 @@ On our [website](https://afurthersourceforinnovation.digital), the necessary ste
 5. [Manual Analysis](##5-manual-analysis)
 6. [Integration Into Figma](#6-integration-into-figma)
 7. [Experimental Approaches](#7-experimental-approaches)
+   <br/><br/>
 
 # 1. Setup
 
@@ -381,6 +382,7 @@ FigmaPlugin/
 Import the plugin via the manifest.json file.
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginImport.gif?raw=true)
+<br/><br/>
 
 #### 2. Download the selected comments
 
@@ -391,7 +393,6 @@ From now on, you can follow the process explained on our [website](https://afurt
 
 If you want to have also Images in your App, request an demo access. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
 https://cors-anywhere.herokuapp.com/corsdemo
-\
 \
 
 # 7. Experimental Approaches
