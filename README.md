@@ -383,8 +383,58 @@ Import the Plugin via the manifest.json file.
 
 #### 2. Download the selected comments
 
-Use the download button to download your selected comments.
+Use the download button in the Webapp to download your selected comments. Import them into figma via the provided Figma Plugin.
+From now on you can follow the process which is explained on our [Website](https://afurthersourceforinnovation.digital).
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
 # 7. Experimental Approaches
+
+1. Zero-Shot-Learning
+   Zero shot learning, in a machine learning context, describes a model that is trained to fit a particular context without ever having seen an example. To test this type of model, you can use the open source library Transformers, which provides easy access to zero shot learning models. Here is an great [tutorial](https://www.kdnuggets.com/2021/04/zero-shot-learning.html) which explains the approach.
+
+First, we tested how well the model can recognize a topic. Based on the word "gardening" alone, this model classified the sentence: "I created a new tractor for my lawn" with a probability of 98% as belonging to this topic. This type of model could be used, for example, to replace the Subject Matcher or to improve it.
+
+```
+sequence = "I created a new tractor for my lawn."
+candidates_tags = ["gardening"]
+classifier(sequence, candidates_tags)
+
+# returns: {'labels': ['gardening'],
+# 'scores': [0.9801499247550964],
+# 'sequence': 'I created a new tractor for my lawn.'}
+
+sequence = "I was eating bananas."
+candidates_tags = ["gardening"]
+classifier(sequence, candidates_tags)
+
+# {'labels': ['gardening'],
+# 'scores': [0.0001314152468694374],
+# 'sequence': 'I was eating bananas.'}
+```
+
+Similar experiments were carried out with the recognition of innovative posts. Here, however, it quickly became apparent that the zero-shot classifier solves the task worse than the matcher we created. However, with professional training, we could imagine that this type of matcher could provide easier access to the method in the future. However, there will also be the problem that it will be difficult to distinguish between lead user innovations and things that users have built themselves. To the status quo, we still see the human component as essential here.
+
+```
+sequence = “I developed a film.”
+candidates_tags = [“Innovation”]
+classifier(sequence, candidates_tags)
+
+# {‘labels’: [‘Innovation’],
+#  ‘scores’: [0.951065182685852],
+#  ‘sequence’: ‘I developed a film.’}
+
+sequence = “I created a Web-App.”
+candidates_tags = [“Innovation”]
+classifier(sequence, candidates_tags)
+
+# {‘labels’: [‘Innovation’],
+# ‘scores’: [0.9521070122718811],
+# ‘sequence’: ‘I created a Web-App.’}
+```
+
+2. Semantic Search
+
+With the help of a semantic search, another attempt was made to filter the data corpus (find documents that fit together thematically). Here, the approach was based on an article by [Rajput (2020)](https://www.kaggle.com/ajitrajput/semantic-search-engine-using-nlp). First, a Tf-IDF (Term frequency-Inverse Document Frequency) model was created using the corpus. The model prioritizes the words from each document or comment that are most relevant to the context. Using a Latent Semantic Indexing (LSI) model, semantic principal components of the individual documents are then analyzed to find semantically related groups. For example, the term car belongs to a semantic concept that also includes words such as driving, traffic jam, tires, etc. This analysis uses factors such as the combinatorics of words used and is thus very similar to the Word2Vec model. Through this model, thematic similar documents can then be found without necessarily using the same word. In contrast to a rule-based approach, this can save a lot of time, since topic-specific words do not have to be collected. In our experiments, we were able to filter the corpus thematically. This can be especially useful when searching developer forums such as GitHub or trending forums. However, the attempt to search for posts in which lead users report on their innovations did not work as well as we had hoped. Here, the results of the rule-based approach were better.
+
+Semantic search offers great potential for future work, especially since it is possible to search for topics in a corpus even without labeled data.
