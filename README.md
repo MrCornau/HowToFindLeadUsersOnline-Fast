@@ -147,7 +147,7 @@ model.build_vocab(content, progress_per=1000)
 model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
 ```
 
-4. Save the model for later use _02_Word2Vec.py_
+4. Save the model for later use <sub>_02_Word2Vec.py_<sub>
 
 ```
 model.save(
@@ -162,9 +162,163 @@ model.wv.most_similar('diy')
 
 # 4. Analyzing the Corpus
 
+```
+   MatcherExamples/
+   ├─ 01_FindPatterns.py #Demonstration of the usage of SpacyMatchers incontext of LeadUsers
+   ├─ 02_PrepareDoc.py #Preanalyse the corpus to increase speed
+   ├─ 03_PrepareforDisplay.py #Prepare the data to use the WebApp(old version) for manual analysis
+   ├─ matcherFunctions.py #Helperfunctions
+```
+
 For finding patterns as 'I have created' we recommend using a rule-based approach. When analyzing the corpus it is recommended, to save as many features as possible, to create further data analysis tasks. Most important is that you preserve the date, to check the occurrences of a topic over time. For topic extraction, f.e. in trend/market forums, you can use rather a word list or use a semantic search. This involves searching for trend-describing terms within the forums of the market. The same applies in reverse in forums from the trend. In overlapping forums, search for both types of keywords in a row.
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Patterns.jpg?raw=true)
+
+1. InventionMatcher
+   The Innovations Matcher searches for sentences in which a user reports that she has created something or wants to create something. For this purpose, we used verbs that were defined based on our analysis of a DIY forum. Also operators were used in the rules, which lead to the fact that a word may not occur once or several times. Thus, different building blocks of sentences could be marked as optional. Thus sentences like 'I have created' were discovered as well as 'I will create or I have created'.
+
+```
+InventionMatcher = Matcher(nlp.vocab)
+# Defined verbs, which can be related to a lead user innovation
+InnovationVerbs = ['invent', 'design', 'introduce', 'create', 'develop', 'build'
+                   'improve', 'diye', 'engineer', 'make', 'prototype']
+# Matcher looking for phrases like 'I have created..., I will create, We have recently created'.
+InnovationPattern = [
+    {'POS': 'PRON'},  # Pronoun present - wie I, me, us
+    {'POS': 'AUX',  'OP': '*'},  # Auxiliary - is, has
+    {'POS': 'VERB',  'OP': '*'},  # Verb - optional Verb
+    {'POS': 'PART',  'OP': '*'},  # Particle - ’s, not
+    {'POS': 'ADV',  'OP': '*'},  # Adverb - very, tomorrow,
+    {'LEMMA': {'IN': InnovationVerbs}},
+]
+InventionMatcher.add("InventionMatcher", [InnovationPattern])
+```
+
+2. Sent Start Matcher
+   During the manual analysis of the DIY forum, it was noticed that many users do not necessarily use a personal pronoun to report an invention in the first person. Often this is also used silently. For example: Created a Web-App. For this we used a matcher (Fig.15), which specifically looks for one of our innovation verbs at the beginning of a sentence. ("IS_SENT_START": True)
+
+```
+SentStartMatcher = Matcher(nlp.vocab)
+# Defined verbs, which can be related to a lead user innovation
+InnovationVerbs = ['invent', 'design', 'introduce', 'create', 'develop', 'build'
+                   'improve', 'diye', 'engineer', 'make', 'prototype']
+# Matcher that searches for phrases like Created a Web-App, or Have created a Web-App.
+SentStartPattern = [{'POS': 'AUX',  'OP': '*'},  # Auxiliary
+                    {'POS': 'VERB', 'LEMMA': {'IN': InnovationVerbs}, 'IS_SENT_START': True}]
+SentStartMatcher.add("SentStartMatcher", [SentStartPattern])
+```
+
+3. NounMatcher
+   Another pattern of describing one's own inventions was found to be the use of certain nouns in combination with a pronoun. For example, _'my creation’_.
+
+```
+NounMatcher = Matcher(nlp.vocab)
+# Nouns defined by us, which can be related to a lead user innovation
+Nouns = ['creation', 'design', 'design', 'invention', 'enhancement']
+NounPattern = [
+    {'POS': 'PRON'},  # Pronoun present  - I, me, us,
+    {'POS': 'ADJ', 'OP': '*'},  # Adjective - great, incredible
+    {'LOWER': {'IN': Nouns}}]
+NounMatcher.add("NounMatcher", [NounPattern])
+```
+
+4. Subject Matcher
+   The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, drawn on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list the phrase matcher from SpaCy was used. Here we did also experiments with Zero Shot Learning and Semantic search which you can find [here](#7-experimental-approaches)
+
+```
+SubjectMatcher = PhraseMatcher(nlp.vocab, attr='LOWER')
+# The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, drawn on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list the phrase matcher from SpaCy was used.
+SubjectsSpecificWords = ['garden', 'outdoor', 'tree', 'grass', 'lawn', 'trunk', 'leaf', 'forestry', 'harvesting', 'tool', 'tool', 'drilling machine', 'chain saw', 'riding mower', 'earth drilling rigs', 'sprayers', 'wrench',
+                         'harvesting', 'sapling', 'stump', 'bush', 'shrub', 'pines', 'branches', 'tress', 'dogwood', 'conifer', 'backyard', 'gardens', 'yard', 'patio', 'plot', 'beds', 'flowerbed', 'bed', 'planter', 'farming', 'shrub', 'prune']
+SubjectPattern = [nlp(Subject) for Subject in SubjectsSpecificWords]
+SubjectMatcher.add('SubjectPattern', SubjectPattern)
+```
+
+5. Analyse your Corpus
+   Based on the respective matchers, the comments were then analyzed. In case a comment matches a matcher, an object is returned which returns the sentence and the recognized pattern. If there is no match, False is returned.
+   Iterate over the rows of your corpus and use the Single or Double Matcher
+
+Single Matcher
+
+```
+#Positive Result
+SingleMatcher(InnovationMatcher,“I created a WebApp“)
+# returns: {„detected“: True, „match“: „i created“, „sent“: „I created a WebApp“}
+
+#Negative Result
+SingleMatcher(InnovationMatcher,“I really don’t like my camera“) #returns {„detected“: False}
+```
+
+Single Matcher
+
+```
+#Positive Result
+SingleMatcher(InnovationMatcher,“I created a WebApp“)
+# returns: {„detected“: True, „match“: „i created“, „sent“: „I created a WebApp“}
+
+#Negative Result
+SingleMatcher(InnovationMatcher,“I really don’t like my camera“) #returns {„detected“: False}
+```
+
+Double Matcher
+
+```
+#Positive Result
+DoubleMatcher(SubjectMatcher, InnovationMatcher,“I have created a new type of Chainsaw“)
+# Returns:  {„detected“: True, „match“: ‚chainsaw‘, „match2“: „i have created“, „sent“: „i have created a new type of chainsaw“}
+
+#Negative Result
+DoubleMatcher(SubjectMatcher, InnovationMatcher,“I really like that tree“) #Returns {„detected“: False, „match“: tree, „sent“: „i really like that tree“}
+
+#Negative Result
+SingleMatcher(InnovationMatcher,“I really dont like my camera“) #Returns {„detected“: False}
+```
+
+6. Increase speed
+
+We found out that tokenizing every sentence of our corpus needed the most time. To get the corpus analysed faster, you can prepare the doc object used by the Matchers. Thereby you analyse the doc object and store it as bytes. By this we could improve the time that was needed to analyse our corpus significantly
+
+```
+import pandas as pd
+import spacy
+from spacy.tokens import DocBin
+nlp = spacy.load("en_core_web_md")
+
+df = pd.read_csv(
+    'YourData.csv')
+
+
+def docObj(content):
+    doc = nlp(content.lower())
+    doc_bin = DocBin()
+    doc_bin.add(doc)
+    doc_bin_bytes = doc_bin.to_bytes()
+    return doc_bin_bytes
+
+
+df['doc'] = df['content'].apply(docObj)
+df.to_csv('CorpusWithDoc.csv')
+```
+
+Matcher
+Just change the FunctionNames in your file, to make use of the Matchers, that already uses the pre analysed doc file
+
+```
+SingleMatcherWithDoc(InnovationMatcher,doc,“I created a WebApp“)
+DoubleMatcherWithDoc(SubjectMatcher, InnovationMatcher,doc,“I have created a new type of Chainsaw“)
+```
+
+7. Prepare for Display (Old Prototype)
+   In ould prototype we splittet the data corpus by year, suborigin and found pattern. Thereby we could skip bad lists. The curret Tool for amanual analysis is currently under construction, why we explain here how to use the old one.
+
+```
+Folder/
+├─ Suborigin/
+│  ├─ created_2020_suborigin.json
+│  ├─ invented_2020_suborigin
+│  ├─ created_2021_suborigin
+│  ├─ ...
+```
 
 # 5. Manual Analysis
 
