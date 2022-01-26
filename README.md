@@ -336,8 +336,37 @@ npm i
 
 Install the Json Server globaly, to store selected comments
 
+```
+npm install -g json-server
+```
+
+Place your analysed files in the json folder of the WebApp.
+Folders are automatically displayed as tabs.
+
+```
+Webapp/
+├─ src/
+│  ├─ json/
+│  │  ├─ Suborigin/ # place your analysed comments here
+│  │  │  ├─ comments.json
+│  │  ├─ Suborigin2/
+│  │  │  ├─ comments.json
+│  │  ├─ .../
+│  │  │  ├─ comments.json
+```
+
+Start the development server
+
+```
+npm run dev
+```
+
+2. New Webapp, with more features and ab better User Experience - coming soon!
+
+![WebApp-New](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/FinalWebapp.jpg?raw=true)
+
 # 6. Integration Into Figma
 
-![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
+![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
 # 7. Experimental Approaches
