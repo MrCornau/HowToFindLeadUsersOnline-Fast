@@ -24,14 +24,14 @@ On our [website](https://afurthersourceforinnovation.digital), the necessary ste
 @First set up the environment and install all necessary requirements. It is recommended to use Python 3.9 or above.
 Steps down below can be skipped if you are using Jupiter Notebook, Kaggle, or Google Colab.
 
-1. Clone the Repository
+#### 1. Clone the Repository
 
 ```
   git clone https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast.git LeadUserAnalysisInMyDomain
   cd LeadUserAnalysisInMyDomain
 ```
 
-2. Initialize a Virtual Environment
+#### 2. Initialize a Virtual Environment
 
 ```
 pip install virtualenv
@@ -39,15 +39,16 @@ virtualenv venv
 source venv/bin/activate
 ```
 
-3. Install all necessary requirements
+#### 3. Install all necessary requirements
 
 ```
 pip3 install . -r requirements.txt
 ```
 
-4. Install a Spacy NLP Modell
-   Depending on which system you are working - Windows/[Linux,Mac] - CPU/GPU - you have to change the Spacy Model you are working with.
-   You seperately have to download the spacy English model. We used the en_core_web_md modell. Get more Information [here](https://spacy.io/usage).
+#### 4. Install a Spacy NLP Modell
+
+Depending on which system you are working - Windows/[Linux,Mac] - CPU/GPU - you have to change the Spacy Model you are working with.
+You seperately have to download the spacy English model. We used the en_core_web_md modell. Get more Information [here](https://spacy.io/usage).
 
 ```
 python3 -m spacy download en_core_web_md modell
@@ -64,18 +65,19 @@ To use the prepared Matchers you should use the following format for your data.
 
 Collect data from the forums which have been defined in the workshop _(Worksheet 8)_. From previous experiences, data from the last two years is enough. Older posts are not relevant for future innovation topics. Use the prepared scraping options as described in the prepared Github Repository.
 
-1. Check if you can find an already written scraper in the following links
+#### 1. Check if you can find an already written scraper in the following links
 
 - https://github.com/LameLemon/scrapers
 
 We for example used the [PSRAW](https://github.com/markekraus/PSRAW) to get comments from Reddit.
 
-2. Use librarys like Beatiful Soup
-   In our case the open source Python library Beautifulsoup was used to scrape a forum. This can be used to retrieve and search the HTML code of a given link. You then look for specific features of individual comments. For example, a unique CSS class or an ID with which comments can be identified.
+#### 2. Use librarys like Beatiful Soup
 
-   Alwayse be pacient to not break the site, while sending to many requests per time. Follow the rules in the http://domaintoscrape.com/robots.txt file. Find some further informations [here](https://developers.google.com/search/docs/advanced/robots/intro)
+In our case the open source Python library Beautifulsoup was used to scrape a forum. This can be used to retrieve and search the HTML code of a given link. You then look for specific features of individual comments. For example, a unique CSS class or an ID with which comments can be identified.
 
-   We provided some examples to understand the basic concept of beautiful soup.
+Alwayse be pacient to not break the site, while sending to many requests per time. Follow the rules in the http://domaintoscrape.com/robots.txt file. Find some further informations [here](https://developers.google.com/search/docs/advanced/robots/intro)
+
+We provided some examples to understand the basic concept of beautiful soup.
 
 ```
    ScrapingExamples/
@@ -84,8 +86,9 @@ We for example used the [PSRAW](https://github.com/markekraus/PSRAW) to get comm
    ├─ 03_CrawlComments.py #scrape comments into an csv file (Pagination includet)
 ```
 
-3. Use Webservices like ParseHub
-   Furthermore, you can use providers like [Parshub](https://www.parsehub.com/) to get comments more easily. They offer a user-friendly interface to filter HTML code similar to the Beautiful Soup Library. In contrast, however, this approach is not unlimited free of charge.
+#### 3. Use Webservices like ParseHub
+
+Furthermore, you can use providers like [Parshub](https://www.parsehub.com/) to get comments more easily. They offer a user-friendly interface to filter HTML code similar to the Beautiful Soup Library. In contrast, however, this approach is not unlimited free of charge.
 
 # 3. Defining Patterns and Words
 
@@ -98,7 +101,7 @@ Use the words which have been collected in the Workshop to create patterns _(Wor
    ├─ 03_CameraDomain.model #Pretrained model, based on the camera domain
 ```
 
-0. Demo | <sub><sup>_01_Word2VecDemonstration.py_</sup></sub>
+#### 0. Demo | <sub><sup>_01_Word2VecDemonstration.py_</sup></sub>
 
 ```
 from gensim.models import Word2Vec
@@ -113,7 +116,7 @@ model.wv.similar_by_word('spot', topn=10)
 
 ```
 
-1. Prepare Data | <sub><sup>_02_Word2Vec.py_</sup></sub>
+#### 1. Prepare Data | <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 
@@ -130,7 +133,7 @@ content = removed.content.apply(gensim.utils.simple_preprocess)
 
 ```
 
-2. Following we set up the gensim modle | <sub><sup>_02_Word2Vec.py_</sup></sub>
+#### 2. Following we set up the gensim modle | <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 model = gensim.models.Word2Vec(
@@ -141,20 +144,20 @@ model = gensim.models.Word2Vec(
 model.build_vocab(content, progress_per=1000)
 ```
 
-3. Train the Model _02_Word2Vec.py_
+#### 3. Train the Model _02_Word2Vec.py_
 
 ```
 model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
 ```
 
-4. Save the model for later use | <sub><sup>_02_Word2Vec.py_</sup></sub>
+#### 4. Save the model for later use | <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 model.save(
     'DomainName.csv')
 ```
 
-5. Use the Model to find similar words in your context _02_Word2Vec.py_
+#### 5. Use the Model to find similar words in your context _02_Word2Vec.py_
 
 ```
 model.wv.most_similar('diy')
@@ -174,8 +177,9 @@ For finding patterns as 'I have created' we recommend using a rule-based approac
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Patterns.jpg?raw=true)
 
-1. InventionMatcher | <sub><sup>01_FindPatterns.py</sup></sub>
-   The Innovations Matcher searches for sentences in which a user reports that she has created something or wants to create something. For this purpose, we used verbs that were defined based on our analysis of a DIY forum. Also operators were used in the rules, which lead to the fact that a word may not occur once or several times. Thus, different building blocks of sentences could be marked as optional. Thus sentences like 'I have created' were discovered as well as 'I will create or I have created'.
+#### 1. InventionMatcher | <sub><sup>01_FindPatterns.py</sup></sub>
+
+The Innovations Matcher searches for sentences in which a user reports that she has created something or wants to create something. For this purpose, we used verbs that were defined based on our analysis of a DIY forum. Also operators were used in the rules, which lead to the fact that a word may not occur once or several times. Thus, different building blocks of sentences could be marked as optional. Thus sentences like 'I have created' were discovered as well as 'I will create or I have created'.
 
 ```
 InventionMatcher = Matcher(nlp.vocab)
@@ -194,8 +198,9 @@ InnovationPattern = [
 InventionMatcher.add("InventionMatcher", [InnovationPattern])
 ```
 
-2. Sent Start Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
-   During the manual analysis of the DIY forum, it was noticed that many users do not necessarily use a personal pronoun to report an invention in the first person. Often this is also used silently. For example: Created a Web-App. For this we used a matcher (Fig.15), which specifically looks for one of our innovation verbs at the beginning of a sentence. ("IS_SENT_START": True)
+#### 2. Sent Start Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
+
+During the manual analysis of the DIY forum, it was noticed that many users do not necessarily use a personal pronoun to report an invention in the first person. Often this is also used silently. For example: Created a Web-App. For this we used a matcher (Fig.15), which specifically looks for one of our innovation verbs at the beginning of a sentence. ("IS_SENT_START": True)
 
 ```
 SentStartMatcher = Matcher(nlp.vocab)
@@ -208,8 +213,9 @@ SentStartPattern = [{'POS': 'AUX',  'OP': '*'},  # Auxiliary
 SentStartMatcher.add("SentStartMatcher", [SentStartPattern])
 ```
 
-3. NounMatcher | <sub><sup>01*FindPatterns.py</sup></sub>
-   Another pattern of describing one's own inventions was found to be the use of certain nouns in combination with a pronoun. For example, *'my creation’\_.
+#### 3. NounMatcher | <sub><sup>01\*FindPatterns.py</sup></sub>
+
+Another pattern of describing one's own inventions was found to be the use of certain nouns in combination with a pronoun. For example, \*'my creation’\_.
 
 ```
 NounMatcher = Matcher(nlp.vocab)
@@ -222,8 +228,9 @@ NounPattern = [
 NounMatcher.add("NounMatcher", [NounPattern])
 ```
 
-4. Subject Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
-   The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, drawn on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list the phrase matcher from SpaCy was used. Here we did also experiments with Zero Shot Learning and Semantic search which you can find [here](#7-experimental-approaches)
+#### 4. Subject Matcher | <sub><sup>01_FindPatterns.py</sup></sub>
+
+The goal of this matcher is to find out if a comment deals with a certain topic. A large set of words was used, drawn on the one hand from a created taxonomy, but also from a Word2Vec model. To use this list the phrase matcher from SpaCy was used. Here we did also experiments with Zero Shot Learning and Semantic search which you can find [here](#7-experimental-approaches)
 
 ```
 SubjectMatcher = PhraseMatcher(nlp.vocab, attr='LOWER')
@@ -234,9 +241,10 @@ SubjectPattern = [nlp(Subject) for Subject in SubjectsSpecificWords]
 SubjectMatcher.add('SubjectPattern', SubjectPattern)
 ```
 
-5. Analyse your Corpus | <sub><sup>01_FindPatterns.py</sup></sub>
-   Based on the respective matchers, the comments were then analyzed. In case a comment matches a matcher, an object is returned which returns the sentence and the recognized pattern. If there is no match, False is returned.
-   Iterate over the rows of your corpus and use the Single or Double Matcher
+#### 5. Analyse your Corpus | <sub><sup>01_FindPatterns.py</sup></sub>
+
+Based on the respective matchers, the comments were then analyzed. In case a comment matches a matcher, an object is returned which returns the sentence and the recognized pattern. If there is no match, False is returned.
+Iterate over the rows of your corpus and use the Single or Double Matcher
 
 Single Matcher
 
@@ -263,7 +271,7 @@ DoubleMatcher(SubjectMatcher, InnovationMatcher,“I really like that tree“) #
 SingleMatcher(InnovationMatcher,“I really dont like my camera“) #Returns {„detected“: False}
 ```
 
-6. Increase speed | <sub><sup>02_PrepareDoc.py </sup></sub>
+#### 6. Increase speed | <sub><sup>02_PrepareDoc.py </sup></sub>
 
 We found out that tokenizing every sentence of our corpus needed the most time. To get the corpus analysed faster, you can prepare the doc object used by the Matchers. Thereby you analyse the doc object and store it as bytes. By this we could improve the time that was needed to analyse our corpus significantly
 
@@ -297,8 +305,9 @@ SingleMatcherWithDoc(InnovationMatcher,doc,“I created a WebApp“)
 DoubleMatcherWithDoc(SubjectMatcher, InnovationMatcher,doc,“I have created a new type of Chainsaw“)
 ```
 
-7. Prepare for Display (Old Prototype) | <sub><sup>03_PrepareforDisplay.py</sup></sub>
-   In ould prototype we splittet the data corpus by year, suborigin and found pattern. Thereby we could skip bad lists. The curret Tool for amanual analysis is currently under construction, why we explain here how to use the old one.
+#### 7. Prepare for Display (Old Prototype) | <sub><sup>03_PrepareforDisplay.py</sup></sub>
+
+In ould prototype we splittet the data corpus by year, suborigin and found pattern. Thereby we could skip bad lists. The curret Tool for amanual analysis is currently under construction, why we explain here how to use the old one.
 
 ```
 Folder/
