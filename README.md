@@ -379,7 +379,7 @@ FigmaPlugin/
 
 Import the Plugin via the manifest.json file.
 
-![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/ImportPlugin.gif?raw=true)
+![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginImport.gif?raw=true)
 
 #### 2. Download the selected comments
 
