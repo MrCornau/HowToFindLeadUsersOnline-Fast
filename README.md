@@ -14,8 +14,8 @@ On our [website](https://afurthersourceforinnovation.digital), the necessary ste
 1. [Setup](#1-setup)
 2. [Creation of the Data Corpus](#2-creation-of-the-data-corpus)
 3. [Defining Patterns and Words](#3-defining-patterns-and-words)
-4. [Analyzing the Corpus](#4-analyzing-the-corpus)
-5. [Manual Analysis](##5-manual-analysis)
+4. [Analysis of the corpus](#4-analysis-of-the-corpus)
+5. [Manual Analysis](#5-manual-analysis)
 6. [Integration Into Figma](#6-integration-into-figma)
 7. [Experimental Approaches](#7-experimental-approaches)
    <br/><br/>
