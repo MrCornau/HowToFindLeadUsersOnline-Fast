@@ -91,6 +91,28 @@ We for example used the [PSRAW](https://github.com/markekraus/PSRAW) to get comm
 
 Use the words which have been collected in the Workshop to create patterns _(Worksheet 3 & 8)_. If the field is new and the jargon of the field could not be evaluated by experts, we recommend using a Word2Vec Model to find word embeddings in your data corpus. Thus, further words can be found within a subject area, but also deonyms. For example, the deonym Tempo (handkerchiefs) could be uncovered by such a model. While analysing gardening forums, we came across the deonym Toro, which is used for lawn mowers.
 
+```
+   Word2VecExamples/
+   ├─ 01_Word2VecDemonstration.py #Demonstration of an word 2 vec model traind on comments from the camera domain
+   ├─ 02_Word2Vec.py #Train your own Word2Vec Model
+   ├─ 03_CameraDomain.model #Pretrained model, based on the camera domain
+```
+
+0. Demo
+
+```
+from gensim.models import Word2Vec
+
+#load provided model
+model = Word2Vec.load(
+    "CameraDomain.model")
+
+#Search for words used in a smiliar context like spot. Show 10 results
+model.wv.similar_by_word('spot', topn=10)
+
+
+```
+
 1. Prepare Data
 
 ```
@@ -142,14 +164,18 @@ df = pd.read_csv('YourFile.csv')
 At First we prepared our data
 
 ```
-#remove all rows of the datacorpus whitout content
-removed = df.dropna(subset=['content'])
+import gensim
+import pandas as pd
 
-# Preprocess the data for the Word2Vec training. It tokenizes all the words and sets them to lower case.
+df = pd.read_csv('Path-to-your-data.csv')
+
+
+removed = df.dropna(subset=['content'])  # remove all Rows whitout content
+# Preprocessing of the data for Word2Vec training. All words are split into tokens and set in lowercase.
 content = removed.content.apply(gensim.utils.simple_preprocess)
 
-#This outputs following structure. From every sentence a list is generated. Each word is saved seperately as a token. Also the punktuation and unnecessary words like 'a' have been removed, as they are not important for the vord2vec model.
-['my', 'germination', 'process', 'is', 'so', 'far', 'so', 'good', 'next', 'step', 'is', 'to', 'transplant', 'into', 'soil']
+# This results in the following structure. A list is generated from each record. Each word is stored separately as a token. Also the punctuation and unnecessary words like 'a' were removed.
+#['my', 'germination', 'process', 'is', 'so', 'far', 'so', 'good', 'next', 'step', 'is', 'to', 'transplant', 'into', 'soil']
 
 ```
 
@@ -157,13 +183,11 @@ Following we set up the gensim modle
 
 ```
 model = gensim.models.Word2Vec(
-    window = 10, # how many words bevore and after are used for training
-    min_count = 2, # min words per sentence
-    workers= 6 #defines the cores of your machine which are used seperately, if you have only 4 use 4
+    window=10,  # how many words bevore and after are used for training
+    min_count=2,  # min words per sentence
+    workers=6 #defines the cores of your machine which are used seperately, if you have only 4 use 4
 )
-
 model.build_vocab(content, progress_per=1000)
-
 ```
 
 Train the Model
@@ -175,7 +199,8 @@ model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
 Save the model for later use
 
 ```
-model.save('YOURFILEPATH.model')
+model.save(
+    'DomainName.csv')
 ```
 
 Use the Model to find similar words in your context
