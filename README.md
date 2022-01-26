@@ -147,7 +147,7 @@ model.build_vocab(content, progress_per=1000)
 model.train(content, total_examples=model.corpus_count, epochs=model.epochs)
 ```
 
-4. Save the model for later use <sub>_02_Word2Vec.py_<sub>
+4. Save the model for later use / <sub><sup>_02_Word2Vec.py_</sup></sub>
 
 ```
 model.save(
