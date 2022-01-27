@@ -2,7 +2,7 @@
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Headerimage.jpg?raw=true)
 
-Masterthesis @HfG Gmuend. Read more about our Thesis [here](https://afurthersourceforinnovation.digital).
+Masterthesis [@HfG Gmuend](https://sg.hfg-gmuend.de/). Read more about our Thesis [here](https://afurthersourceforinnovation.digital).
 
 The Digital Lead User Analysis is a method to find future customer needs. By analyzing user-generated content, it is possible to infer needs that have not yet been solved by the market.
 
@@ -373,7 +373,7 @@ npm run dev
 
 2. New webapp, with more features and better usability - coming soon!
 
-![WebApp-New](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/FinalWebapp.jpg?raw=true)
+![WebApp-New](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Lead-Finder-ComingSoon.jpg?raw=true)
 
 <br/><br/>
 
