@@ -9,7 +9,7 @@ The Digital Lead User Analysis is a method to find future customer needs. By ana
 In our master thesis, we have taken the approach of [Eric von Hippel and Sandro Kaulartz](https://evhippel.files.wordpress.com/2019/01/ai-method-for-discovering-need-solution-pairs-2019.pdf) and put it into an economic context with the help of methods from strategic design.
 
 In this repository, it is described how to repeat our technological process, and apply the Lead User Method to a specific domain.
-On our [website](https://afurthersourceforinnovation.digital), the necessary steps before and after are described.
+The whole process is explained through the worksheets. You can find the worksheets on our [website](https://afurthersourceforinnovation.digital).
 
 1. [Setup](#1-setup)
 2. [Creation of the Data Corpus](#2-creation-of-the-data-corpus)
@@ -186,7 +186,7 @@ For finding patterns like "I created" we recommend using a rule-based approach. 
 
 #### 1. InventionMatcher | <sub><sup>01_FindPatterns.py</sup></sub>
 
-The Innovations Matcher searches for sentences in which a user reports that they have created something or want to create something. To do this, we used verbs that were defined based on our analysis of a home improvement forum. Also, operators were used in the rules that result in a word not being allowed to occur once or more than once. This allowed various sentence components to be marked as optional. Thus, sentences such as "I have created" were detected as well as "I will create or I have created."
+The Innovations Matcher searches for sentences in which users posts that they created something or want to create something. To do this, we used verbs that were defined based on our analysis of a home improvement forum. Also, operators were used in the rules that result in a word not being allowed to occur once or more than once. This allowed various sentence components to be marked as optional. Thus, sentences such as "I have created" were detected as well as "I will create or I have created."
 
 ```
 InventionMatcher = Matcher(nlp.vocab)
