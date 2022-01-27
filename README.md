@@ -76,7 +76,7 @@ We for example used the [PSRAW](https://github.com/markekraus/PSRAW) to get comm
 
 #### 2. Use libraries like Beatiful Soup
 
-In our case the open source Python library Beautifulsoup was used to scrape a forum. This can be used to retrieve and search the HTML code of a given link. You then look for specific features of individual comments. For example, a unique CSS class or an ID with which comments can be identified.
+In our case the open source Python library [Beautifulsoup](https://beautiful-soup-4.readthedocs.io/en/latest/) was used to scrape a forum. This can be used to retrieve and search the HTML code of a given link. You then look for specific features of individual comments. For example, a unique CSS class or an ID with which comments can be identified.
 
 Alwayse be pacient to not break the site, while sending to many requests per time. Follow the rules in the http://domaintoscrape.com/robots.txt file. Find some further informations [here](https://developers.google.com/search/docs/advanced/robots/intro)
 
