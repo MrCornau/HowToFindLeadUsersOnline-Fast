@@ -313,6 +313,12 @@ SingleMatcherWithDoc(InnovationMatcher,doc,“I created a WebApp“)
 DoubleMatcherWithDoc(SubjectMatcher, InnovationMatcher,doc,“I have created a new type of Chainsaw“)
 ```
 
+#### File Structure
+
+Your file structure will now look like this. The marked sent is the analyzed comment prepared for the WebApp. Based on the pattern ---> [] !!! the WebApp recognizes where the found word is and highlights it. The sorted words column records whether a sentence was sorted out and if so, which word caused it.
+
+<table><tbody><tr><th>Origin</th><th>Suborigin</th><th>Autor</th><th>Link</th><th>Content</th><th>Date</th><th>Medialink</th><th>Score</th><th>Selector</th><th>MarkedSent</th><th>sortedWord</th></tr><tr><td>Reddit</td><td>r/photography</td><td>MrCornau</td><td>https://</td><td>User generated content goes here</td><td> Timestamp</td><td>https://</td><td>Score/Likes/etc.</td><td>create</td><td>---> I !!! have ---> created !!!</td><td>None</td></tr></tbody></table>
+
 #### 7. Prepare for Display (Old Prototype) | <sub><sup>03_PrepareforDisplay.py</sup></sub>
 
 In our prototype, we split the data corpus by year, origin, and pattern found. This allowed us to omit some bad lists. The current tool for manual analysis is currently under construction, so we explain how to use the old tool here.
@@ -344,7 +350,7 @@ cd WebApp
 npm i
 ```
 
-Install Json-Server globaly, to store selected comments in an local Json-File
+Install Json-Server globaly, to store selected comments in an local Json-File.
 
 ```
 npm install -g json-server
@@ -401,7 +407,7 @@ From now on, you can follow the process explained on our [website](https://afurt
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginWebappDemo.gif?raw=true)
 
-If you want to have also Images in your App, request an demo access. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
+If you want to have also Images in displayed in Figma, request an demo acces for corse-anywhere. Credits to [Rob--W](https://github.com/Rob--W/cors-anywhere/issues/301).
 https://cors-anywhere.herokuapp.com/corsdemo
 
 <br/><br/>
