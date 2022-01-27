@@ -335,7 +335,7 @@ In our testing phase, we used the prototype that we also provide in this reposit
 
 #### 1. Old version
 
-![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/WebApp-Old.jpg?raw=true)
+![WebApp-Old](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/OldWebApp.jpeg?raw=true)
 
 Install all dependencies
 
