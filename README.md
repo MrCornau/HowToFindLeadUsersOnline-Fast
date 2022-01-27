@@ -2,7 +2,7 @@
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Headerimage.jpg?raw=true)
 
-Masterthesis [@HfG Gmuend](https://sg.hfg-gmuend.de/). Read more about our Thesis [here](https://afurthersourceforinnovation.digital).
+Masterthesis <a href="https://sg.hfg-gmuend.de/" target="_blank">@HfG Gmuend</a>. Read more about our Thesis [here](https://afurthersourceforinnovation.digital).
 
 The Digital Lead User Analysis is a method to find future customer needs. By analyzing user-generated content, it is possible to infer needs that have not yet been solved by the market.
 
@@ -180,7 +180,7 @@ model.wv.most_similar('diy')
    ├─ matcherFunctions.py #Helperfunctions
 ```
 
-For finding patterns like "I created" we recommend using a rule-based approach. When analyzing the corpus, it is recommended to save as many features as possible to create further data analysis tasks. Most importantly, keep the date to check the occurrence of a topic over time. For topic extraction, for example in trending/market forums, you can rather use a word list or use semantic search. This involves searching for trend-describing terms in market forums. The same applies vice versa in forums from the trend. In overlapping forums, search for both types of keywords in a row. [DoubleMatcher](####double-matcher)
+For finding patterns like "I created" we recommend using a rule-based approach. When analyzing the corpus, it is recommended to save as many features as possible to create further data analysis tasks. Most importantly, keep the date to check the occurrence of a topic over time. For topic extraction, for example in trending/market forums, you can rather use a word list or use semantic search. This involves searching for trend-describing terms in market forums. The same applies vice versa in forums from the trend. In overlapping forums, search for both types of keywords in a[row](####double-matcher).
 
 ![Header Image](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Patterns.jpg?raw=true)
 
