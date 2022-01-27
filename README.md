@@ -389,13 +389,20 @@ We provide a Figma plugin to convert the webapp into a tool where workshops can 
 
 #### 1. Set up Figma plugin (currently in development mode)
 
+Install all dependencies
+
+```
+cd FigmaPlugin/
+npm i
+```
+
+Import the plugin via the manifest.json file.
+
 ```
 FigmaPlugin/
 ├─ manifest.json
 ├─ ...
 ```
-
-Import the plugin via the manifest.json file.
 
 ![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/PluginImport.gif?raw=true)
 <br/><br/>
