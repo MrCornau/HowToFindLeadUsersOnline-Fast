@@ -11,7 +11,7 @@ In our master thesis, we have taken the approach of [Eric von Hippel and Sandro 
 In this repository, it is described how to repeat our technological process, and apply the Lead User Method to a specific domain.
 The whole process is explained through the worksheets. You can find the worksheets on our [website](https://afurthersourceforinnovation.digital) or in the [Figma Community](https://www.figma.com/community/file/1068572845553499343).
 
-![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Worksheets.gif?raw=true)(https://www.figma.com/community/file/1068572845553499343)
+[![Worksheets](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Worksheets.gif?raw=true)](https://www.figma.com/community/file/1068572845553499343)
 
 1. [Setup](#1-setup)
 2. [Creation of the Data Corpus](#2-creation-of-the-data-corpus)
