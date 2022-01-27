@@ -9,7 +9,9 @@ The Digital Lead User Analysis is a method to find future customer needs. By ana
 In our master thesis, we have taken the approach of [Eric von Hippel and Sandro Kaulartz](https://evhippel.files.wordpress.com/2019/01/ai-method-for-discovering-need-solution-pairs-2019.pdf) and put it into an economic context with the help of methods from strategic design.
 
 In this repository, it is described how to repeat our technological process, and apply the Lead User Method to a specific domain.
-The whole process is explained through the worksheets. You can find the worksheets on our [website](https://afurthersourceforinnovation.digital).
+The whole process is explained through the worksheets. You can find the worksheets on our [website](https://afurthersourceforinnovation.digital) or in the [Figma Community](https://www.figma.com/community/file/1068572845553499343).
+
+![WebApp-Figma](https://github.com/MrCornau/HowToFindLeadUsersOnline-Fast/blob/main/Assets/Worksheets.gif?raw=true)(https://www.figma.com/community/file/1068572845553499343)
 
 1. [Setup](#1-setup)
 2. [Creation of the Data Corpus](#2-creation-of-the-data-corpus)
